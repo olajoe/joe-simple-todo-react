@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import TodoInput from './TodoInput';
+import TodoList from './TodoList'
 
 class App extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      currentTime: 0
+      todoItems: []
     }
-    this.handleHeaderClicked = this.handleHeaderClicked.bind(this)
+    this.addTodo = this.addTodo.bind(this)
   }
   
-  handleHeaderClicked(time) {
+  addTodo(newTodo) {
     this.setState({
-      currentTime: time
+      todoItems: this.state.todoItems.concat([newTodo])
     })
   }
 
   render() {
-    let { currentTime } = this.state
+
+    let {todoItems} = this.state
 
     return (
       <div>
-        <Header currentUser="Jaturon" isLoggedIn/> 
-        <div>currentTime = {currentTime}</div>
-        <Footer onTimerClick={this.handleHeaderClicked}></Footer>
+        <TodoInput onNewTodo={this.addTodo} />
+        <TodoList items={todoItems} />
       </div>
     );
   }
